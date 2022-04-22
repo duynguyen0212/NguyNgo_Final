@@ -54,10 +54,11 @@ public class Main {
         si.addInput("ActionsPerSecond", List.of("1"));
         si.addInput("RobotsMustYell", List.of("HELLO, WORLD"));
 
+        System.out.println("------SPYAIR WORLD TOUR------");
         // Run the simulation
         StatisticsContainer stats = runTest(si);
-
-
+        System.out.println("------END OF TOUR. THANK YOU------");
+        System.out.println("\nStatistic for the band tour:");
         // Post the finalized statistics
         stats.printStatisticsContainer();
 

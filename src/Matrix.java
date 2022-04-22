@@ -4,7 +4,6 @@ import BandTour.Manager;
 import Skeleton.SimulationInput;
 
 import java.lang.Thread;
-import java.util.ArrayList;
 
 /**
  * The class that is responsible for running the simulation.
@@ -33,7 +32,18 @@ public class Matrix {
         kentaThread.start();
         uzThread.start();
         momikenThread.start();
-        //audienceThread.start();
+        audienceThread.start();
+
+        try{
+            managerThread.join();
+            ikeThread.join();
+            kentaThread.join();
+            uzThread.join();
+            momikenThread.join();
+            audienceThread.join();
+        }catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
 
     }

@@ -85,7 +85,7 @@ public class StatisticsContainer {
         for (String key : this.allStatistics.keySet()) {
             System.out.println(String.format("Statistics for %s:", key));
             this.allStatistics.get(key).printStatistics();
-            System.out.println("\n\n");
+            System.out.println("\n");
         }
     }
 }

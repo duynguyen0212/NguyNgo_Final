@@ -20,10 +20,13 @@ public class BandMember extends Unit implements java.util.Observer {
     public BandMember(String name, SimulationInput input, Manager manager) {
         super(name, input);
         this.m = manager;
+        registerManager(m);
     }
 
     public void playSong() {
-
+        System.out.println(getMemberName() + " is performing on stage...");
+        try{Thread.sleep(2000);}catch(Exception e){
+            System.out.println(e);}
     }
 
     public String getMemberName() {
@@ -32,9 +35,12 @@ public class BandMember extends Unit implements java.util.Observer {
 
     @Override
     public void performAction() {
-        registerManager(m);
-        this.m.schedule.release();
-
+        while (true) {
+            this.m.releaseSchedule();
+            this.m.acquirePerformPermit();
+            playSong();
+            this.m.releaseSchedule();
+        }
     }
 
     @Override
@@ -65,7 +71,6 @@ public class BandMember extends Unit implements java.util.Observer {
         if (arg instanceof String) {
             location = (String) arg;
             loc = location;
-            //System.out.println(getMemberName() + " will perform in " + location);
             return;
         }
         System.out.println("\nAssistant " + ((Manager.Assistant) o).getName() + " says our band will perform in " + loc + " on " + arg);

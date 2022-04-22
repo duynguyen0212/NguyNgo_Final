@@ -17,7 +17,8 @@ public class Manager extends Unit {
     public int locIndex = 0;
 
     private Semaphore ticket;
-    Semaphore schedule;
+    private Semaphore schedule;
+    private Semaphore perform;
 
     Assistant a = new Assistant("Duy");
 
@@ -103,11 +104,39 @@ public class Manager extends Unit {
         }
     }
 
-    public void releaseTicket() {
-        this.ticket.release();
+    public void releaseSchedule() {
+        this.schedule.release();
+    }
+    public void acquireSchedule(){
+        try {
+            this.schedule.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
-    public int getTicket() {
+    public void releasePerformPermit(int p) {
+        this.perform.release(p);
+    }
+    public void acquirePerformPermit(){
+        try {
+            this.perform.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void releaseTicket(int t) {
+        this.ticket.release(t);
+    }
+    public void acquireTicket(int t){
+        try {
+            this.ticket.acquire(t);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    public int availableTicket() {
         return this.ticket.availablePermits();
     }
 
@@ -135,6 +164,7 @@ public class Manager extends Unit {
         super(name, input);
         ticket = new Semaphore(0);
         schedule = new Semaphore(0);
+        perform = new Semaphore(0);
 
     }
 
@@ -146,30 +176,34 @@ public class Manager extends Unit {
      */
     @Override
     public void performAction() {
-        System.out.println("\nManager is scheduling next tour...");
-        try {
-            schedule.acquire(4);
-            Thread.sleep(2000);
-        } catch (Exception e) {
-            System.out.println(e);
+        while (true) {
+            try {
+                schedule.acquire(4);
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            System.out.println("\nManager is scheduling next tour...");
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Manager.this.setLocation();
+            Manager.this.setPerformDate(new Date());
+            System.out.println("\nThe band is arriving to tour destination...");
+            try {
+
+                Thread.sleep(1000);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
+            System.out.println("Manager is checking ticket...");
+            Random numberOfTickets = new Random();
+            releaseTicket(numberOfTickets.nextInt(500));
         }
-
-        Manager.this.setLocation();
-        Manager.this.setPerformDate(new Date());
-        System.out.println("The band is arriving to tour destination...");
-        try {
-
-            Thread.sleep(1000);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-        System.out.println("Manager is checking ticket...");
-        this.ticket.release(10);
-
-
     }
-
     @Override
     public void submitStatistics() {
 
