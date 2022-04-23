@@ -18,7 +18,7 @@ public class Matrix {
         BandMember kenta = new BandMember("Kenta", input, manager);
         BandMember uz = new BandMember("UZ", input, manager);
         BandMember momiken = new BandMember("Momiken", input, manager);
-        Audience audience = new Audience(input, manager);
+        Audience audience = new Audience("Audiences",input, manager);
 
         Thread managerThread = new Thread(manager);
         Thread ikeThread = new Thread(ike);

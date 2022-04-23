@@ -1,3 +1,9 @@
+/**
+ * Name: Ngoc Duy Nguyen
+ * Date: 4/25/2022
+ * Description: Final project - Music Band World Tour
+ */
+
 import BandTour.Manager;
 import Skeleton.*;
 
@@ -33,6 +39,9 @@ public class Main {
         return runTest(new SimulationInput(input));
     }
 
+    /**
+     * Main body to run the band tour simulation
+     * */
     public static void main(String[] args) {
 		/*
 		You can either prepare your input as an array, or add it directly to your
@@ -52,27 +61,18 @@ public class Main {
         SimulationInput si = new SimulationInput();
         si.addInput("Time", List.of("10")); // In seconds
         si.addInput("ActionsPerSecond", List.of("1"));
-        si.addInput("RobotsMustYell", List.of("HELLO, WORLD"));
 
         System.out.println("------SPYAIR WORLD TOUR------");
         // Run the simulation
         StatisticsContainer stats = runTest(si);
-        System.out.println("------END OF TOUR. THANK YOU------");
+        System.out.println("\n------END OF TOUR. THANK YOU------");
         System.out.println("\nStatistic for the band tour:");
         // Post the finalized statistics
         stats.printStatisticsContainer();
 
-		/*
-			Add many more tests below using different input. Try to probe for edge cases and organize
-			your tests properly.
-		*/
-
-        // You can change the input, and then reset the statistics singleton with:
-        // input = new Skeleton.SimulationInput();
-        // // ... Add input
-        // si.resetInstance(input);
-        //Manager manager = new Manager("test", new SimulationInput());
-        //manager.observerTesting(manager);
+		/* testing
+         Manager manager = new Manager("test", new SimulationInput());
+         manager.observerTesting(manager);*/
 
 
     }
