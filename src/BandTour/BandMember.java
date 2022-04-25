@@ -32,11 +32,17 @@ public class BandMember extends Unit implements java.util.Observer {
 
     /**
      * Method for each band member to perform on stage
+     * it would take time for members to get on stage and perform
      */
     public void perform() {
-        System.out.println(getMemberName() + " is performing on stage...");
         try {
             Thread.sleep(2000);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        System.out.println(getMemberName() + " is performing on stage...");
+        try {
+            Thread.sleep(5000);
         } catch (Exception e) {
             System.out.println(e);
         }

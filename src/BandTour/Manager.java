@@ -19,10 +19,10 @@ import java.util.concurrent.Semaphore;
 public class Manager extends Unit {
 
     private Date performDate = null;
-    private String[] location = {"Canada", "Japan", "U.S.", "Korea", "Australia", "United Kingdom", "Spain", "Mexico", "Turkey"};
+    private String[] location = {"Canada", "Japan", "U.S.A", "Korea", "Australia", "United Kingdom", "Spain", "Mexico", "Turkey"};
     private int locIndex = 0; // index of location array of string
     private int numberOfTour;
-    public int counter = 0;
+    private int counter = 0;
     private int totalTicket = 0;
     private Random rnd = new Random();
     private ArrayList<String> vCountries = new ArrayList<>();
@@ -140,7 +140,6 @@ public class Manager extends Unit {
      * @param date date to perform
      */
     public void setPerformDate(Date date) {
-        performDate = date;
         a.setPerformDateAssist(date);
     }
 
@@ -152,6 +151,7 @@ public class Manager extends Unit {
         int i = rnd.nextInt(0, 5);
         locIndex = i;
         a.setLocationAssist(locIndex);
+
     }
 
     /**
@@ -279,14 +279,6 @@ public class Manager extends Unit {
             name = aName;
         }
 
-        /**
-         * Get perform date
-         *
-         * @return performDate
-         */
-        public Date getPerformDate() {
-            return performDate;
-        }
 
         /**
          * Get assistant's name
@@ -303,7 +295,6 @@ public class Manager extends Unit {
          * @param date
          */
         public void setPerformDateAssist(Date date) {
-            performDate = date;
             setChanged();
             notifyObservers(date);
         }
@@ -347,7 +338,6 @@ public class Manager extends Unit {
             }
         }
     }
-
 
     /**
      * method to test observer

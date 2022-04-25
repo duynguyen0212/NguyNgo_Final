@@ -2,6 +2,7 @@
  * after that the audience will release the permit for the band so they can get on stage and perform*/
 package BandTour;
 
+import Skeleton.FloatWorkerStatistic;
 import Skeleton.SimulationInput;
 import Skeleton.Unit;
 import Skeleton.WorkerStatistic;
@@ -14,6 +15,7 @@ public class Audience extends Unit {
     private int numberOfAudience;
     private int counter = 0;
     private float waitTime = 0;
+    private Random rnd = new Random();
 
     /**
      * Audience's constructor
@@ -25,6 +27,7 @@ public class Audience extends Unit {
     public Audience(String name, SimulationInput input, Manager manager) {
         super(name, input);
         this.m = manager;
+        this.getStats().addStatistic("Average wait time", new FloatWorkerStatistic("Average wait time"));
     }
 
     /**
@@ -42,6 +45,8 @@ public class Audience extends Unit {
     @Override
     public void performAction() {
         while (counter < this.m.getNumberOfTour()) {
+            // A timer to count how long the audience has to wait
+            float startTime = System.nanoTime();
             // Acquire first ticket to trigger audience thread
             this.m.acquireTicket(1);
             numberOfAudience = this.m.availableTicket();
@@ -51,11 +56,12 @@ public class Audience extends Unit {
             int temp = numberOfAudience + 1;
             System.out.println(temp + " audiences are entering into the theatre...");
             try {
-                Thread.sleep(2000);
+                Thread.sleep(rnd.nextInt(2000, 7000));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
+            float endTime = System.nanoTime();
+            waitTime = waitTime + (endTime - startTime);
             System.out.println("The Audience are ready to see the performance");
             // All audience are in the theatre so they release permit for the band
             this.m.releasePerformPermit(4);
@@ -70,5 +76,6 @@ public class Audience extends Unit {
     @Override
     public void submitStatistics() {
         this.getStats().getStatistic("ActiveUnits").addValue(1);
+        this.getStats().getStatistic("Average wait time").addValue(waitTime/this.m.getNumberOfTour());
     }
 }
