@@ -20,7 +20,7 @@ public class Audience extends Unit {
     /**
      * Audience's constructor
      *
-     * @param name    audience name
+     * @param name   audience name
      * @param input   simulation input
      * @param manager manager will take care of the audience
      */

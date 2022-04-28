@@ -87,7 +87,7 @@ public class BandMember extends Unit implements java.util.Observer {
      */
 
     public void registerManager(Manager m) {
-        m.a.addObserver(this);
+        m.getAssistant().addObserver(this);
     }
 
     /**

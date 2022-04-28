@@ -31,7 +31,7 @@ public class Manager extends Unit {
     private Semaphore schedule;
     private Semaphore perform;
 
-    Assistant a = new Assistant("Duy");
+    private Assistant a = new Assistant("Duy");
 
     /**
      * Manager's constructor. Semaphore ticket, schedule, perform will be initialized
@@ -260,6 +260,12 @@ public class Manager extends Unit {
         for (int i = 0; i < vCountries.size(); i++) {
             System.out.print(vCountries.get(i) + " | ");
         }
+    }
+
+    /** Get assistant
+     * @return a assistant*/
+    public Assistant getAssistant(){
+        return a;
     }
 
     /* Helper class Assistant
