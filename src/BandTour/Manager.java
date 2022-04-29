@@ -100,8 +100,8 @@ public class Manager extends Unit {
             Random numberOfTickets = new Random();
             int tickets = numberOfTickets.nextInt(500);
 
-            releaseTicket(tickets); // Release semaphore tickets
             System.out.println("Number of tickets: " + tickets);
+            releaseTicket(tickets); // Release semaphore tickets
 
             // Add number of tickets to total tickets sold
             totalTicket = totalTicket + tickets;
@@ -257,8 +257,9 @@ public class Manager extends Unit {
      * Method to print visited country
      */
     public void printVisitedCountry() {
-        for (int i = 0; i < vCountries.size(); i++) {
-            System.out.print(vCountries.get(i) + " | ");
+        Iterator<String> iterator = vCountries.iterator();
+        while(iterator.hasNext()) {
+            System.out.print(iterator.next() + " | ");
         }
     }
 
